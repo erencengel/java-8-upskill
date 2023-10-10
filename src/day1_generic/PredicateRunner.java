@@ -7,6 +7,10 @@ import java.util.List;
 public class PredicateRunner {
     public static void main(String[] args) {
         List<Integer> nums = new ArrayList<>(Arrays.asList(4, 2, 6, 3, 34, 2, 4, 1, 5, 2, 7));
+
+        mathFunc(nums, new OddPredicate<>());
+        System.out.println("-------------");
+        mathFunc(nums, new EvenPredicate<>());
     }
 
     public static void mathFunc(List<Integer> list, NumberPredicate<Integer> numberPredicate){

@@ -3,9 +3,9 @@ package day1_generic.student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Batch {
+public class Batch<B extends Student> {
     private String name;
-    private List<Student> studentsList;
+    private List<B> studentsList;
 
     public Batch(String name) {
         this.name = name;
@@ -20,11 +20,11 @@ public class Batch {
         this.name = name;
     }
 
-    public List<Student> getStudentsList() {
+    public List<B> getStudentsList() {
         return studentsList;
     }
 
-    public void addStudent(Student student){
+    public void addStudent(B student){
         studentsList.add(student);
     }
 

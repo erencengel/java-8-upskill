@@ -1,6 +1,6 @@
 package day1_generic.student;
 
-public class Student {
+public abstract class Student {
     private String name;
 
     public Student(String name) {

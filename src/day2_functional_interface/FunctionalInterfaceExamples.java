@@ -1,11 +1,10 @@
 package day2_functional_interface;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.function.*;
 
 public class FunctionalInterfaceExamples {
     public static void main(String[] args) {
@@ -48,6 +47,53 @@ public class FunctionalInterfaceExamples {
             }
         };
         subNames.accept(names, 3);
+
+        Map<String, String> holidays = new HashMap<>();
+        holidays.put("July", "4th Of July");
+        holidays.put("October", "Halloween");
+        holidays.put("December", "Christmas");
+        holidays.forEach((k, v) -> System.out.println(k + " " + v));
+
+        System.out.println("-------- Function ---------");
+
+        // parameter is String and return type it Integer
+        Function<String, Integer> countVowels  = str -> {
+            String vowels = "aeiou";
+            int numOfVowels = 0;
+            for(char each : str.toCharArray()){
+                if(vowels.contains(each + "")){
+                    numOfVowels++;
+                }
+            }
+            return numOfVowels;
+        };
+
+        System.out.println(countVowels.apply("wooden spoon"));
+        System.out.println(countVowels.apply("Mississippi"));
+
+        // convert int[] to a List
+
+        Function<int[], List<Integer>> convertToList = arr -> {
+            List<Integer> list = new ArrayList<>();
+            for(int each : arr){
+                list.add(each);
+            }
+            return list;
+        };
+
+        int[] a = {4, 2, 4, 1, 5, 2};
+        List<Integer> aList = convertToList.apply(a);
+        System.out.println(aList);
+
+        System.out.println("-------- Supplier ---------");
+        Supplier<String> getDay = () -> LocalDate.now().getDayOfWeek().name();
+        System.out.println(getDay.get());
+
+        Supplier<String> getDateTime = () -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("M/d/y h:m a"));
+        System.out.println(getDateTime.get());
+
+        Supplier<Integer> getRandomNumber = () -> new Random().nextInt(1001);
+        System.out.println(getRandomNumber.get());
 
 
     }

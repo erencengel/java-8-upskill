@@ -18,7 +18,12 @@ public class AppleRunner {
                 new Apple("Red", 65)
         ));
 
+        List<Apple> greenApples = filter(data, new AppleGreenColorPredicate());
+        System.out.println(greenApples);
 
+        List<Apple> smallApples = filter(data, apple -> apple.getWeight() < 70);
+        // () -> {}
+        System.out.println(smallApples);
     }
 
     public static List<Apple> filter(List<Apple> apples, ApplePredicate applePredicate){

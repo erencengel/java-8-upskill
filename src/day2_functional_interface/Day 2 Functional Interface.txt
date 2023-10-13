@@ -1,0 +1,100 @@
+Java 8 Upskill
+
+10/11/2023
+
+Day 2: Functional Interface
+
+------------------------------------------------------------------------
+
+Lombok
+
+if your project is currently a java project: 
+    command/control + shift + a
+    search: Add Framework Support
+    pick Maven
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
+    </dependencies>
+
+    install plugin:
+        IntelliJ -> settings -> Plugins -> Lombok
+
+    enable annotation processors
+        IntelliJ -> settings -> Build -> Compiler -> Annotation Processors -> enable
+
+    allows us to easily generate getters, setters, toString, etc
+    we don't need to go too deep into this, so lets just use:
+
+    @AllArgsConstructor
+    @Data
+
+------------------------------------------------------------------------
+
+Functional Interface
+
+    not used for abstraction/inheritance
+        - not inherited
+       	- not intend to be implemented to a class to be overridden
+
+	define one abstract method
+	    -> trying to define more than one abstract method in a functional interface would cause a syntax issue
+
+	        common names for those methods: test, apply, function
+
+	    @FunctionalInterface annotation can be defined optionally above the interface line to help define the functional interface correctly
+
+	Q: If you don't inherit these interface, how would we implement the abstract method?
+		lambda expression
+
+------------------------------------------------------------------------
+
+Built in functional interface: (from java)
+
+	Predicate, Consumer, Function, Supplier, BiPredicate, BiConsumer, BiFunction
+
+	https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
+
+    - Predicate<T>
+        defines a function with one parameter and returns boolean
+
+        boolean test(T t)
+			-> p is a common name for the argument name in the lambda 
+
+		ex:
+            removeIf method when we used the lambda to remove the elements
+            the parameter of the removeIf method was a Predicate functional interface
+
+    - Consumer<T>
+        defines a function with one parameter and does not return anything
+
+        void accept(T t)
+
+	    ex:
+	        forEach method from Iterable takes the Consumer argument
+
+    - BiConsumer<T, U>
+        defines a function with two parameters and does not return anything
+
+        void accept(T t, U u)
+
+        ex:
+            forEach(BiConsumer)
+                map has this method to allow iteration of the map
+
+    - Function<T, R> 
+        defines a function with one parameter and a return type (any object)
+
+        R apply(T t);
+
+    - Supplier<T>
+    	defines a function with no parameter and a return type (any object)
+
+    	T get();
+
+------------------------------------------------------------------------
+

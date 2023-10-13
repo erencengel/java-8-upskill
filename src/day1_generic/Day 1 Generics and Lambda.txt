@@ -1,0 +1,169 @@
+Java 8 Upskill
+
+10/10/2023
+
+Day 1: Generics & Lambda
+
+------------------------------------------------------------------------
+
+Java 8 Upskill Overview
+
+Day 1: Generics & Lambda
+Day 2: Functional Interface
+Day 3: Double Colon & Comparator
+Day 4: Streams
+Day 5: Streams
+Day 6: Optional & BigDecimal
+
+------------------------------------------------------------------------
+
+Generics
+
+	added in java 5
+
+	a topic that we should understand. We will see it being used in ready code libraries. We will not need to define the generic
+
+	<>		diamond/angle brackets
+
+	problem: before generics there was no type protection
+	solution: generics allow the class to define which object type is allowed
+
+		Ex: List things = new ArrayList();
+				vs
+			List<String> things = new ArrayList();
+
+		how the collections are defined: List<E>
+
+	generics are like parameters for the class. if you want to use an instance of the class some type needs to be defined
+
+	how are generics used
+
+		public interface Name<T>
+		public class Name<T>
+		<T extends Class>
+		public <T> hello(T t)
+
+	commonly used generic type letters:
+
+		E = elements
+		K = key
+		T = type
+		V = value
+
+	--------------------------------------- come back 2:05 est
+
+	Task: 	
+
+		create a class Student
+		create and encapsulation a name variable
+		create a constructor to initialize the name
+
+		create a sub class of Student: SdetStudent
+		create a sub class of Student: JavaDevStudent
+		create a sub class of Student: CyberSecurityStudent
+
+		create a class Batch
+		create and encapsulation these variables: name, students(List)
+		create a constructor
+		create a constructor to initialize the name and ArrayList
+		create a method addStudent():
+			adds Students into the Batch
+
+		create a runner class with a main method
+		test the code so far with different Students. What is the problem?
+
+		modify the Batch class with generics
+		check the runner class to see the impact of the generic
+		create Batches of different types (String, Integers, etc)
+
+		modify the generic to only work for a certain subclass type:
+			Batch<T extends Student>
+
+	---------------------------------------
+
+------------------------------------------------------------------------
+
+Lambda
+
+	---------------------------------------
+
+	Task
+
+		create an interface NumberPredicate<T>
+		create an abstract method test()
+			parameter: T
+			return: boolean
+
+		create a class OddPredicate<T>
+		implement the NumberPredicate
+		implement test method for odd numbers
+
+		create a class to run the code
+		create a List with some numbers
+		create a generic method that will perform a number functionality on a List
+			method(List, NumberPredicate)
+
+	---------------------------------------
+
+	Everything is an object in java. There is no actions alone.
+	To call an action we have a class that is instantiated and from that object we call a method
+
+	Lambda allows functional programming in java
+		-> we can make an action without extra steps of a class
+
+	What is lambda: functions that don't belong to any class
+
+	Why we need lambda: we have functional interface which need to be implemented [don't worry today]
+
+	syntax:
+		(parameters) -> {statements}
+
+	Flow for implementation:
+
+		Common design pattern: Interface -> Class -> implementation
+
+		With Lambda: Interface -> implementation
+
+	behavior parameterization: 	
+		during software development requirements are always changing/updating
+		so when code is written it should be created in a flexible way that can handle different behaviors
+		
+	---------------------------------------
+
+	Task: create a program that will help a farmer maintain his inventory. Find all the green apples and find all the apples that are heavier than 200g
+
+		create a class Apple
+		create instance variables color and weight
+		create a constructor to initialize the variables
+		encapsulate and override toString
+
+		create an interface ApplePredicate
+		create an abstract method test()
+			parameter: Apple
+			return: boolean
+
+		create a class AppleGreenColorPredicate
+		implement the ApplePredicate
+		implement test method to check for green color apples
+
+		create a class AppleHeavyPredicate
+		implement the ApplePredicate
+		implement test method to check for apples more than 200g
+
+		create a runner class
+		create an ArrayList of Apples
+		create a method to filter the apples based on a ApplePredicate argument
+			parameter: List<Apple>, ApplePredicate
+			return: List<Apple>
+
+	---------------------------------------
+
+	special syntax rules:
+		- type inference: you don't need to define the type for parameters because it is understood from the method you are implementing
+
+		- when there is only one parameters the parenthesis aren't needed
+
+		- when there is only one statement the curly brackets aren't needed
+
+------------------------------------------------------------------------
+

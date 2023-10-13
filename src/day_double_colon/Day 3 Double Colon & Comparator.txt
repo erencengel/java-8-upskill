@@ -1,0 +1,122 @@
+Java 8 Upskill
+
+10/13/2023
+
+Day 3: Double Colon & Comparator
+
+------------------------------------------------------------------------
+
+Double Colon Operator
+
+	method reference: when methods are called in a lambda expression they can be written with a different syntax
+
+		Class::method
+		object::method
+		Class::new			-> constructor call in lambda
+
+		() -> {}
+
+	---------------------------------------
+
+	Task
+
+		create a class User
+		create & encapsulate instance variables: username, password
+		create a constructor & toString
+		create a Runner class and create a List of Users
+
+	---------------------------------------
+
+	Q: what if you need to call a 3 argument constructor
+
+------------------------------------------------------------------------
+
+Comparator<T>
+
+	functional interface that can define how to sort objects
+
+	defines a method:
+
+	int compare(T o1, T o2);
+
+		return -1: o1 comes before o2
+		return 1: o1 comes after o2
+		return 0: o1 is equal to o2
+
+	compareTo
+		the core functionality of comparing objects was the same, so instead of writing the same code every time the compareTo method was created to help us call that functionality
+
+	(Comparator.reverseOrder()); // sort the opposite of natural order (ascending)
+
+	Comparator.comparing()
+		this method accepts a Function and returns a Comparator
+		will be helpful to sort custom objects based on different fields
+
+	---------------------------------------
+
+	Task 
+
+		create a class Movie
+		create instance variables: name, year, rating
+		encapsulate, create constructor and toString
+
+		create a runner class with the following sample Movies(or make your own):
+
+	        List<Movie> movies = new ArrayList<>(Arrays.asList(
+	                new Movie("Star Wars: Episode IV – A New Hope", 1977, 8.6),
+	                new Movie("Avatar", 2009, 7.9),
+	                new Movie("Iron Man", 2008, 7.9),
+	                new Movie("The Dark Knight", 2008, 9.0),
+	                new Movie("Rocky",1976, 8.1)
+	        ));
+
+	    perform the following actions:
+	    	print all the starting Movie data
+	    	sort by year in ascending order
+	    	sort by year in descending order
+	    	sort by the highest rated movie
+	    	sort the names alphabetically
+
+	---------------------------------------
+------------------------------------------------------------------------
+
+automation examples
+
+	window handles:
+		Set<String> windows = driver.getWindowHandles();
+		windows.forEach(id -> driver.switchTo().window(id))
+
+	multiple elements
+		List<WebElement> links =  driver.findElements(By.tagName("a"));
+		links.forEach(each -> System.out.println(each.getText()));
+		links.forEach(each -> System.out.println(each.getAttribute("href")));
+
+		List<WebElement> checkboxes =  driver.findElements(By.tagName("checkbox"));
+		checkboxes.forEach(box -> box.click()); // with lambda
+		checkboxes.forEach(WebElement::click); // with method reference
+
+        cartBtns.forEach(e -> {
+            e.click();
+            Assert.assertEquals(e.getText(), "Expected");
+        });
+
+    sorted
+        List<WebElement> itemsBefore = driver.findElements(By.tagName("items"));
+        List<WebElement> itemsAfter = driver.findElements(By.tagName("items"));
+        itemsAfter.sort(Comparator.comparing(each -> each.getAttribute("price")));
+
+	filtered
+        List<WebElement> items = driver.findElements(By.tagName("items"));
+        items.forEach(each -> Assert.assertEquals("true", each.getAttribute("On Sale")));
+        
+	api
+		List<String> paths;
+	 	paths.forEach(path -> thenPart.body(path, is(notNullValue())));
+
+	 	List<String> allNames = response.path("name");
+	 	allNames.forEach(System.out::println)
+	 	
+------------------------------------------------------------------------
+
+
+

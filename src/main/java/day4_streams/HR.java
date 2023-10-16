@@ -2,6 +2,7 @@ package day4_streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class HR {
@@ -37,5 +38,17 @@ public class HR {
                 .filter(p -> p.getExpectedSalary() < 125_000)
                 .filter(Application::isWillingToRelocate)
                 .forEach(System.out::println);
+
+        System.out.println("========== applications sorted by salaries lowest to highest ==========");
+        applications.stream()
+                .sorted(Comparator.comparing(Application::getExpectedSalary))  // app -> app.getExpectedSalary()
+                .forEach(System.out::println);
+
+        System.out.println("========== applications sorted by salaries lowest to highest, but only look at 3 applications ==========");
+        applications.stream()
+                .sorted(Comparator.comparing(Application::getExpectedSalary))  // app -> app.getExpectedSalary()
+                .limit(3)
+                .forEach(System.out::println);
+
     }
 }

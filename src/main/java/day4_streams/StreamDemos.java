@@ -2,6 +2,7 @@ package day4_streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class StreamDemos {
@@ -43,9 +44,39 @@ public class StreamDemos {
                 .limit(6)
                 .forEach(System.out::println);
 
+        System.out.println("================= skip =================");
+        list.stream()
+                .skip(5)
+                .forEach(System.out::println);
 
+        System.out.println("================= skip & limit =================");
+        list.stream()
+                .skip(4)
+                .limit(3)
+                .forEach(System.out::println);
 
+        System.out.println("================= map =================");
+        list.stream()
+                .map(n -> n * 2)
+                .forEach(System.out::println);
 
+        System.out.println("================= map 2 =================");
+        list.stream()
+                .limit(6)
+                .map(n -> n * n)
+                .forEach(System.out::println);
+        System.out.println("================= sorted =================");
+        list.stream()
+                .sorted()
+                .forEach(System.out::println);
+
+        System.out.println("================= sorted 2 =================");
+        list.stream()
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
 
     }
 }
+
+
+//(3, 5, 1, 4, 12, 3, 1, 3, 5, 12, 5)

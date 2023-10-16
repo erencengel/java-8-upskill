@@ -1,4 +1,4 @@
-package day_double_colon;
+package day3_double_colon;
 
 public class Movie implements Comparable<Movie>{
     private String name;

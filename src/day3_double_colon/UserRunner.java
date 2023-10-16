@@ -1,4 +1,4 @@
-package day_double_colon;
+package day3_double_colon;
 
 import java.util.ArrayList;
 import java.util.Arrays;

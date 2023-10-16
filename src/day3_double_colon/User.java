@@ -1,4 +1,4 @@
-package day_double_colon;
+package day3_double_colon;
 
 public class User {
     private String username;

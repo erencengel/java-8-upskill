@@ -72,6 +72,11 @@ Testing examples
 
          Assert.assertEquals(beforeSort, afterSort)
 
+            items.stream()
+            .map(element -> element.getAttriubte("price"))
+            .map(Double::parseDouble())
+            .sorted()
+
     - verify if all the price are valid
         boolean validPrices = Driver.getDriver().findElements(By.id("n")).stream()
                 .map(e -> e.getAttribute("price"))

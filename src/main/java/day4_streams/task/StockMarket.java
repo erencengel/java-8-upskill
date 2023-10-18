@@ -1,9 +1,7 @@
 package day4_streams.task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class StockMarket {
     public static void main(String[] args) {
@@ -100,8 +98,48 @@ public class StockMarket {
                 .map(Transaction::getValue)
                 .forEach(System.out::println);
 
+        System.out.println("==================\nNew topics");
+        System.out.println("========= toMap =========");
 
+        Map<String, String> traderMap = Arrays.stream(traders)
+                .collect(Collectors.toMap(Trader::getName, Trader::getCity)); // name is key, city is value
+        System.out.println(traderMap);
 
+        System.out.println("========= groupingBy - trader's transactions =========");
+
+        Map<Trader, List<Transaction>> tradersGroupMap = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::getTrader)); // transaction -> transaction.getTrader()
+
+        tradersGroupMap.forEach((k, v) -> {
+            System.out.println(k.getName() + " " + v);
+        });
+
+        System.out.println("========= groupingBy - company =========");
+
+        Map<String, List<Transaction>> comanyMap = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::getCompany));
+
+        comanyMap.forEach((k, v) -> {
+            System.out.println(k + " " + v);
+        });
+
+        comanyMap.get("Apple").forEach(System.out::println);
+
+        System.out.println("========= groupingBy - year =========");
+
+        Map<Integer, List<Transaction>> yearMap = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::getYear));
+
+        yearMap.forEach((k, v) -> {
+            System.out.println(k + " " + v);
+        });
+
+        // most normal flow:
+        List<Integer> nums = new ArrayList<>(Arrays.asList(
+                4, 2, 4, 3, 7, 9, 2, 3, 4, 5, 9, 13
+        ));
+
+        System.out.println(nums.stream().filter(p -> p % 2 == 0).collect(Collectors.toList()));
 
     }
 }

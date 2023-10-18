@@ -2,6 +2,7 @@ package day4_streams.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class StockMarket {
@@ -38,13 +39,70 @@ public class StockMarket {
                 new Transaction(traders[0], "Tesla", 2023, 2300)
         ));
 
+        System.out.println("========= 1) all transactions in 2020 and sort by highest value =========");
+        transactions.stream()
+                .filter(p -> p.getYear() == 2020)
+                .sorted(Comparator.comparing(Transaction::getValue).reversed())
+                .forEach(System.out::println);
 
+        System.out.println("========= 2) Find the 3 biggest transactions =========");
+        transactions.stream()
+                .sorted(Comparator.comparing(Transaction::getValue).reversed())
+                .limit(3)
+                .forEach(System.out::println);
 
+        System.out.println("========= 3) Find the company's name with the smallest 2 transactions =========");
+        transactions.stream()
+                .sorted(Comparator.comparing(Transaction::getValue))
+                .limit(2)
+                .map(Transaction::getCompany)
+                .forEach(System.out::println);
 
+        System.out.println("========= 4) find all the cities trades were made in =========");
+        transactions.stream()
+                .map(Transaction::getTrader)
+                .map(Trader::getCity)
+                .distinct()
+                .forEach(System.out::println);
 
+        System.out.println("========= 5) find all the transactions of Meta =========");
+        transactions.stream()
+                .filter(p -> p.getCompany().equals("Meta"))
+                .forEach(System.out::println);
+
+        System.out.println("========= 6) find all the traders that are from New York =========");
+        Arrays.stream(traders)
+                .filter(p -> p.getCity().equals("New York"))
+                .forEach(System.out::println);
+
+        System.out.println("========= 7) find all the trader's names that are from Chicago =========");
+        transactions.stream()
+                .map(Transaction::getTrader)
+                .filter(p -> p.getCity().equals("Chicago"))
+                .map(Trader::getName)
+                .distinct()
+                .forEach(System.out::println);
+
+        System.out.println("========= 8) find all the trader's names and sort them alphabetically =========");
+        Arrays.stream(traders)
+                .map(Trader::getName) // trader -> trader.getName()
+                .sorted()
+                .forEach(System.out::println);
+
+        System.out.println("========= 9) find if there is any Traders from Los Angeles =========");
+        boolean anyInLosAng = Arrays.stream(traders)
+                .anyMatch(p -> p.getCity().equals("Los Angeles"));
+        System.out.println("anyInLosAng = " + anyInLosAng);
+
+        System.out.println("========= 10) find the values of the transactions Mark was involved in =========");
+        transactions.stream()
+                .filter(p -> p.getTrader().getName().equals("Mark"))
+                .map(Transaction::getValue)
+                .forEach(System.out::println);
 
 
 
 
     }
 }
+

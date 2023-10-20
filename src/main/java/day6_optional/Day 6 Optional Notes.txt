@@ -1,0 +1,102 @@
+Java 8 Upskill
+
+10/20/2023
+
+Day 6 Optional & Big Decimal
+
+------------------------------------------------------------------------
+
+Take this survey about this upskill. Your feedback is critical to improving all future sessions
+https://www.surveymonkey.com/r/FP38TJY
+
+------------------------------------------------------------------------
+
+Optional
+
+	getTransactions.getTrader().getName()
+
+	Q: What if one of these was null?
+
+	null can cause problems if not handled. We should check for null in the code. You may have written code like this:
+
+		public static void check(Transaction transaction){
+			if(transaction != null){
+				if(transaction.getTrader() != null){
+					if(transaction.getTrader().getName() != null)
+				}
+			}
+		}
+
+	but in java 8 the Optional class was added to help with this issue. Optional helps with null protection. Optional objects can be null or not
+
+	instead of creating regular objects	we can create Optional objects for null protection
+			Trader trader;
+			Optional<Trader> trader;
+
+	Optional methods:
+        empty, isPresent, ifPresent, get, orElse, orElseThrow, & more
+
+    stream methods that return Optional:
+        min, max, average, findAny, findFirst, reduce
+
+------------------------------------------------------------------------
+
+BigDecimal
+	java.math.BigDecimal
+    * added much before java 8
+
+	arithmetic operations with primitive datatypes do not have precision, meaning the calculations can not be relied on for specific values
+
+	a String argument is preferred for the BigDecimal constructor
+		new BigDecimal("3.14");
+
+	BigDecimal objects are immutable
+
+	to perform arithmetic operations with the BigDecimal objects the methods can be used
+        ie: add(), subtract(), etc
+
+------------------------------------------------------------------------
+
+Extra:
+Java 9:
+
+    Factory Methods
+        List, Set, Map can be created as immutable collections
+
+        .of
+            List.of(), Set.of(), Map.of(), Map.ofEntries()
+
+        List<Integer> l =  List.of(4, 2, 5, 2);
+        Map<String, Integer> map = Map.of("hello", 1, "world", 2);
+
+        create an ArrayList:
+        List<Integer> l2 = new ArrayList<>(List.of(3, 4, 6, 1, 24, 5)); // now this is an ArrayList, not an ImmutableCollection
+
+    Compact String
+        you may remember the String class using char[] internally, but after this version they are a byte[]
+        short explanation: new encoder that improve memory and performance
+
+    JLink
+        java command line tool that is used to generate a custom JRE
+        regular JRE compiles more files than needed, so we can create a JRE for only the modules we need
+
+    jShell
+        allows you to run quick java code without the class, main method, compiling, etc
+        type: jshell command in command line
+        then just write code
+
+    private methods in interface
+
+    Optional.stream()
+    List<Optional<Integer>> list;
+        list.stream() // Stream<Optional<Integer>>
+        .flatMap(Optional::stream) // Stream<Integer>
+        .collect(Collectors.toList()) // List<Integer>
+
+    Modules
+        high level: we could use jars before (all the code), but now it is possible to use only certain modules (part of the code)
+        think of it as encapsulating packages
+
+------------------------------------------------------------------------
+
+

@@ -2,6 +2,7 @@ package day6_optional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 public class OptionalDemo {
     public static void main(String[] args) {
@@ -51,6 +52,38 @@ public class OptionalDemo {
                 .filter(p -> p > 250) // to check invalid you can use 300 instead
                 .findAny();
         System.out.println(moreThan3.orElse(-1));
+
+        System.out.println("======== min ========");
+        List<Double> temperatures = List.of(60.5, 72.1, 65.2, 67.8, 68.3);
+        OptionalDouble tempsMin = temperatures.stream()
+                .mapToDouble(n -> n)
+                .min();
+        System.out.println(tempsMin); // this is the Optional object
+        System.out.println(tempsMin.getAsDouble()); // this is a double type
+
+        System.out.println("======== max ========");
+        OptionalDouble tempsMax = temperatures.stream()
+                .mapToDouble(n -> n)
+                .max();
+        System.out.println(tempsMax); // this is the Optional object
+        System.out.println(tempsMax.getAsDouble()); // this is a double type
+
+        System.out.println("======== average ========");
+        OptionalDouble tempsAvg = temperatures.stream()
+                .mapToDouble(n -> n)
+                .average();
+        System.out.println(tempsAvg); // this is the Optional object
+        System.out.println(tempsAvg.getAsDouble()); // this is a double type
+
+        System.out.println("======== reduce ========");
+        Optional<Double> minReduced = temperatures.stream().reduce(Double::min);
+        System.out.println(minReduced);
+        Optional<Double> maxReduced = temperatures.stream().reduce(Double::max);
+        System.out.println(maxReduced);
+
+        Optional<Double> sumReduced = temperatures.stream()
+                .reduce(Double::sum);
+        System.out.println(sumReduced);
 
 
     }
